@@ -17,8 +17,8 @@
           "help": {
             "online": "http://forums.trossenrobotics.com/"
           },
-          "url": "https://github.com/dvarrel/arbotix/raw/master/arbotix-0.0.3.tar.bz2",
-          "archiveFileName": "arbotix-0.0.3.tar.bz2",
+          "url": "https://dvarrel.github.io/arbotix/arbotix-hardware.tar.bz2",
+          "archiveFileName": "arbotix-hardware.tar.bz2",
           "checksum": "SHA-256:effa732a34a86099d9a06673352585215753722a97fc4d7f8f20bcf40588eea4",
           "size": "61693",
           "boards": [
