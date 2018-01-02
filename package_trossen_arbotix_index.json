@@ -3,32 +3,12 @@
     {
       "name": "arbotix",
       "maintainer": "dvarrel",
-      "email": "nope@nope.com",
-      "websiteURL": "https://github.com/tician/arbotix",
+      "email": "nop@nop.com",
+      "websiteURL": "https://github.com/dvarrel/arbotix",
       "help": {
         "online": "http://forums.trossenrobotics.com/"
       },
       "platforms": [
-        {
-          "name": "Arbotix AVR Boards",
-          "architecture": "avr",
-          "version": "0.0.1",
-          "category": "Arduino",
-          "help": {
-            "online": "http://forums.trossenrobotics.com/"
-          },
-          "url": "https://tician.github.io/arbotix/boards/arbotix-0.0.1.tar.bz2",
-          "archiveFileName": "arbotix-0.0.1.tar.bz2",
-          "checksum": "SHA-256:db578a4e6debf9045f63f238be129313194a063cbb4dc79f82ef12e69d208f29",
-          "size": "141837",
-          "boards": [
-            { "name": "Arbotix-m" },
-            { "name": "Arbotix (original)" },
-            { "name": "Arbotix2 (ATmega644p)" },
-            { "name": "Arbotix+ (ATmega1280)" }
-          ],
-          "toolsDependencies": []
-        },
         {
           "name": "Arbotix AVR Boards",
           "architecture": "avr",
@@ -37,7 +17,7 @@
           "help": {
             "online": "http://forums.trossenrobotics.com/"
           },
-          "url": "https://tician.github.io/arbotix/boards/arbotix-0.0.2.tar.bz2",
+          "url": "https://github.com/dvarrel/arbotix/boards/arbotix-0.0.2.tar.bz2",
           "archiveFileName": "arbotix-0.0.2.tar.bz2",
           "checksum": "SHA-256:b47b77da26732363639cdc2f65d33a166b0c4b7d2beae72b9c2510f9c6d61c5d",
           "size": "163965",
