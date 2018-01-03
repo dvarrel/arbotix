@@ -1,4 +1,5 @@
-#include <ax12.h>
+//#include <Uno_ax12.h>   //with arduino Uno
+#include <ax12.h>         // with Arbotix-M
 
 const uint8_t SERVOCOUNT = 8;
 const uint8_t broadcastID=254;
