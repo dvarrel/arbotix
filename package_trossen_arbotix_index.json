@@ -6,7 +6,7 @@
       "email": "nop@nop.com",
       "websiteURL": "https://github.com/dvarrel/arbotix",
       "help": {
-        "online": "http://forums.trossenrobotics.com/"
+        "online": "http://www.trossenrobotics.com/p/arbotix-robot-controller.aspx"
       },
       "platforms": [
         {
@@ -22,7 +22,7 @@
           "checksum": "SHA-256:effa732a34a86099d9a06673352585215753722a97fc4d7f8f20bcf40588eea4",
           "size": "61693",
           "boards": [
-            { "name": "Arbotix-m" }
+            { "name": "ArbotiX-M Robocontroller" }
           ],
           "toolsDependencies": []
         }
