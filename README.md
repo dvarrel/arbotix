@@ -1,4 +1,4 @@
-# arbotix
+# arbotix & dynamixel AX-12A
 
 all arduinos : copy folder libraries in Arduino/libraries
 
