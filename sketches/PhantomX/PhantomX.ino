@@ -1,6 +1,7 @@
 //#include <Uno_ax12.h>   //with arduino Uno
 #include <ax12.h>         // with Arbotix-M
 
+
 const uint8_t SERVOCOUNT = 8;
 const uint8_t broadcastID=254;
 const uint16_t Home[]= {512, 380, 644, 340, 684, 561, 512, 512};
@@ -9,7 +10,7 @@ uint8_t id;
 
 void setup(){
   pinMode(0,OUTPUT);  
-  Serial.begin(1000000);
+  Serial.begin(9600);
   delay(10);
   ax12Init(1000000);
   delay(5);
@@ -23,6 +24,9 @@ void loop(){
   if (Serial.available() > 0) {
    uint8_t inByte = Serial.read();
    switch (inByte) {
+    case '0':    
+      SearchServos();
+      break;
     case '1':    
       InfosServos();
       break;
@@ -48,7 +52,13 @@ void loop(){
     case '7':    
       x=Serial.parseInt();
       if (x>0 && x<1024) ChangeSpeed(int(x));
-      break;                                                                                                                                                                                      
+      break; 
+    case '8':
+      GetRegister();
+      break;
+    case '9':
+      SetRegister();
+      break;                                                                                                                                                                                     
  }
   if (inByte!=10) MenuOptions();
   }
@@ -57,6 +67,7 @@ void loop(){
 
 void MenuOptions(){
   Serial.println("###########################"); 
+  Serial.println("0) Search Servos");        
   Serial.println("1) Servo Infos");        
   Serial.println("2) Move to Center");     
   Serial.println("3) Move to Home");     
@@ -64,7 +75,20 @@ void MenuOptions(){
   Serial.println("5) Torque OFF Servos");  
   Serial.println("6) Torque ON Sevos");  
   Serial.println("7) Change Speed (1-1023)");  
+  Serial.println("8) GET register id,reg,length");  
+  Serial.println("9) SET register id,reg,data");  
   Serial.println("###########################"); 
+}
+
+void SearchServos() {
+   Serial.println("#### Search Servos #####");
+   for (id=1;id<=253;id++) {
+    if (ax12GetRegister(id,AX_ID,1)!=-1) {
+      Serial.print("found id:");Serial.print(id);
+      Serial.print("\t model :");Serial.println(ax12GetRegister(id,AX_MODEL_NUMBER_L,2));
+      
+    }
+   }
 }
 
 void PrintInfos(String s,byte r,byte num) {
@@ -102,7 +126,7 @@ void MoveAndPrint() {
   uint16_t y=Serial.parseInt();
   if (id<0 || id>SERVOCOUNT || y<0 || y>=1024) {
     Serial.println("error !");
-    return 0;
+    exit;
   }
   Serial.print("position ");
   Serial.print(ax12GetRegister(id,AX_PRESENT_POSITION_L, 2));
@@ -126,4 +150,28 @@ void MoveAndPrint() {
     Serial.print("\t");
     Serial.println(ax12GetRegister(id,AX_PRESENT_POSITION_L, 2));
   }
+}
+
+void GetRegister() {
+  id=Serial.parseInt();
+  uint8_t reg=Serial.parseInt();
+  uint16_t length=Serial.parseInt();
+  if (id<0 || id>253 || reg<0 || reg>=50) {
+    Serial.println("error !");
+    exit;
+  }
+  
+  Serial.println(ax12GetRegister(id,reg,length));
+}
+
+void SetRegister() {
+  id=Serial.parseInt();
+  uint8_t reg=Serial.parseInt();
+  uint16_t data=Serial.parseInt();
+  if (id<0 || id>253 || reg<0 || reg>=50) {
+    Serial.println("error !");
+    exit;
+  }
+  if (data>255) ax12SetRegister2(id,reg,data);
+  else ax12SetRegister(id,reg,data);
 }
