@@ -1,5 +1,5 @@
 # arbotix & dynamixel AX-12A
-install FTDI drivers cable
+install FTDI cable drivers
 
 all arduinos : copy folder libraries in Arduino/libraries
 
