@@ -1,3 +1,8 @@
+/*
+to install drivers, libraries and hardware to arduino
+go to https://github.com/dvarrel/dynamixel
+*/
+
 //#include <Uno_ax12.h>   //with arduino Uno
 #include <ax12.h>         // with Arbotix-M
 
