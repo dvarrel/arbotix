@@ -14,4 +14,4 @@ https://dvarrel.github.io/dynamixel/package_arbotix_index.json
 then go to board manager and install arbotix
 
 
-other files : modele3D edrawing (http://www.edrawingsviewer.com/)
+other files : modele3D "ReactorASMV12.easm" (http://www.edrawingsviewer.com/)
