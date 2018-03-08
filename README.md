@@ -1,5 +1,5 @@
 # arbotix & dynamixel AX-12A
-install FTDI cable drivers
+install FTDI cable drivers (32 or 64 bits version)
 
 all arduinos : copy folder libraries in Arduino/libraries
 
@@ -12,3 +12,6 @@ arduino 1.8.x : preferences -> additional boards manager url
 https://dvarrel.github.io/dynamixel/package_arbotix_index.json
 
 then go to board manager and install arbotix
+
+
+other files : modele3D edrawing (http://www.edrawingsviewer.com/)
