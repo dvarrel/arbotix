@@ -4,12 +4,13 @@ go to https://github.com/dvarrel/dynamixel
 */
 
 //#include <Uno_ax12.h>   //with arduino Uno
-#include <ax12.h>         // with Arbotix-M
-
+#include <ax12.h>
 
 const uint8_t SERVOCOUNT = 8;
 const uint8_t broadcastID=254;
 const uint16_t Home[]= {512, 380, 644, 340, 684, 561, 512, 512};
+const uint16_t position1[]= {512,700,317,560,460,688,512,512};
+const uint16_t position2[]= {300,700,317,560,460,688,700,200};
 uint16_t AX12speed=100;
 uint8_t id;
 
@@ -29,14 +30,10 @@ void loop(){
   if (Serial.available() > 0) {
    uint8_t inByte = Serial.read();
    switch (inByte) {
-    case '0':    
-      SearchServos();
-      break;
     case '1':    
       InfosServos();
       break;
      case '2':    
-      Serial.println("#### -> Center position ####");
       ax12SetRegister2(broadcastID, AX_GOAL_POSITION_L, 512);
       break;     
      case '3':    
@@ -57,13 +54,23 @@ void loop(){
     case '7':    
       x=Serial.parseInt();
       if (x>0 && x<1024) ChangeSpeed(int(x));
-      break; 
-    case '8':
-      GetRegister();
-      break;
-    case '9':
-      SetRegister();
-      break;                                                                                                                                                                                     
+      break;                                                                                                                                                                                      
+    case '8':    
+      Serial.println("#### -> position 1 #####");
+       for (id=1;id<= SERVOCOUNT;id++) ax12SetRegister2(id, AX_GOAL_POSITION_L, position1[id-1]);
+      break;                                                                                                                                                                                      
+    case '9':   
+      Serial.println("##### -> position 2 ####");
+       for (id=1;id<= SERVOCOUNT;id++) ax12SetRegister2(id, AX_GOAL_POSITION_L, position2[id-1]);
+      break;                                                                                                                                                                                      
+    case 'a':    
+      Serial.println("#### Open Hand ####");
+      ax12SetRegister2(8, AX_GOAL_POSITION_L,512);
+      break;                                                                                                                                                                                      
+    case 'b':    
+      Serial.println("#### Close Hand ####");
+      ax12SetRegister2(8, AX_GOAL_POSITION_L,200);
+      break;                                                                                                                                                                                      
  }
   if (inByte!=10) MenuOptions();
   }
@@ -72,7 +79,6 @@ void loop(){
 
 void MenuOptions(){
   Serial.println("###########################"); 
-  Serial.println("0) Search Servos");        
   Serial.println("1) Servo Infos");        
   Serial.println("2) Move to Center");     
   Serial.println("3) Move to Home");     
@@ -80,20 +86,11 @@ void MenuOptions(){
   Serial.println("5) Torque OFF Servos");  
   Serial.println("6) Torque ON Sevos");  
   Serial.println("7) Change Speed (1-1023)");  
-  Serial.println("8) GET register id,reg,length");  
-  Serial.println("9) SET register id,reg,data");  
+  Serial.println("8) Move to position1");  
+  Serial.println("9) Move to position2");  
+  Serial.println("a) Open Hand");  
+  Serial.println("b) Close Hand");  
   Serial.println("###########################"); 
-}
-
-void SearchServos() {
-   Serial.println("#### Search Servos #####");
-   for (id=1;id<=253;id++) {
-    if (ax12GetRegister(id,AX_ID,1)!=-1) {
-      Serial.print("found id:");Serial.print(id);
-      Serial.print("\t model :");Serial.println(ax12GetRegister(id,AX_MODEL_NUMBER_L,2));
-      
-    }
-   }
 }
 
 void PrintInfos(String s,byte r,byte num) {
@@ -131,7 +128,7 @@ void MoveAndPrint() {
   uint16_t y=Serial.parseInt();
   if (id<0 || id>SERVOCOUNT || y<0 || y>=1024) {
     Serial.println("error !");
-    exit;
+    return 0;
   }
   Serial.print("position ");
   Serial.print(ax12GetRegister(id,AX_PRESENT_POSITION_L, 2));
@@ -155,28 +152,4 @@ void MoveAndPrint() {
     Serial.print("\t");
     Serial.println(ax12GetRegister(id,AX_PRESENT_POSITION_L, 2));
   }
-}
-
-void GetRegister() {
-  id=Serial.parseInt();
-  uint8_t reg=Serial.parseInt();
-  uint16_t length=Serial.parseInt();
-  if (id<0 || id>253 || reg<0 || reg>=50) {
-    Serial.println("error !");
-    exit;
-  }
-  
-  Serial.println(ax12GetRegister(id,reg,length));
-}
-
-void SetRegister() {
-  id=Serial.parseInt();
-  uint8_t reg=Serial.parseInt();
-  uint16_t data=Serial.parseInt();
-  if (id<0 || id>253 || reg<0 || reg>=50) {
-    Serial.println("error !");
-    exit;
-  }
-  if (data>255) ax12SetRegister2(id,reg,data);
-  else ax12SetRegister(id,reg,data);
 }
