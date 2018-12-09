@@ -6,6 +6,11 @@ ax12GetRegister	KEYWORD2
 ax12SetRegister	KEYWORD2
 ax12SetRegister2	KEYWORD2
 ax12SetPosition	KEYWORD2
+SetPosition	KEYWORD2
+GetPosition	KEYWORD2
+TorqueOn	KEYWORD2
+Relax KEYWORD2
+PlayTone KEYWORD2
 loadPose	KEYWORD2   
 readPose	KEYWORD2
 writePose	KEYWORD2   
