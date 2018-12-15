@@ -17,7 +17,7 @@ writePose	KEYWORD2
 interpolateSetup	KEYWORD2
 interpolateStep	KEYWORD2
 interpolating	KEYWORD2
-
+WaitServosMoving	KEYWORD2
 
 
 AX_MODEL_NUMBER_L	LITERAL1
