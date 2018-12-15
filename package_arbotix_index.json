@@ -12,7 +12,7 @@
         {
           "name": "Arbotix AVR Boards",
           "architecture": "avr",
-          "version": "0.0.2",
+          "version": "1.0.0",
           "category": "Arduino",
           "help": {
             "online": "http://www.trossenrobotics.com/p/arbotix-robot-controller.aspx"
